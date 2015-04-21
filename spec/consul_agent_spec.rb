@@ -22,4 +22,8 @@ shared_examples "consul-agent" do
   describe file("/etc/sudoers") do
     it { should contain("go   ALL=(ALL:ALL) NOPASSWD: ALL") }
   end
+
+  describe file("/tmp/consul") do
+    it { should be_directory }
+  end
 end

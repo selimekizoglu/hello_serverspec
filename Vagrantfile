@@ -10,7 +10,7 @@ Vagrant.configure(2) do |config|
     goservice.vm.box = "ubuntu/trusty64"
     goservice.vm.provision "ansible" do |ansible|
       ansible.playbook = "provisioning/goservice.yml"
-      ansible.ask_sudo_pass = true
+      #ansible.ask_sudo_pass = true
       ansible.extra_vars = {
         dmz_domain: 'istanbulcoders',
         haproxy_ip: '127.0.0.1'

@@ -13,7 +13,8 @@ Vagrant.configure(2) do |config|
       #ansible.ask_sudo_pass = true
       ansible.extra_vars = {
         dmz_domain: 'istanbulcoders',
-        haproxy_ip: '127.0.0.1'
+        haproxy_ip: '127.0.0.1',
+        consul_servers: ['127.0.0.2']
       }
     end
   end

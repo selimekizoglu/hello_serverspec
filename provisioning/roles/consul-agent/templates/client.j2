@@ -1,0 +1,10 @@
+{
+  "server": false,
+  "data_dir": "/var/consul",
+  "log_level": "INFO",
+  "start_join": [
+  {% for server in consul_servers %}
+    "{{ server }}"{% if not loop.last %},{% endif %}
+  {% endfor %}
+  ]
+}

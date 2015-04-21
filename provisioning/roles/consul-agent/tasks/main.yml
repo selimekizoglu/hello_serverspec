@@ -17,5 +17,18 @@
   lineinfile: "dest=/etc/sudoers state=present line='consul   ALL=(ALL:ALL) NOPASSWD: ALL' validate='visudo -cf %s'"
   sudo: yes
 - name: create consul data-dir
-  file: path=/tmp/consul state=directory owner=consul group=consul
+  file: path=/var/consul state=directory owner=consul group=consul
   sudo: yes
+- name: create consul config-dir
+  file: path=/etc/consul.d state=directory owner=consul group=consul
+  sudo: yes
+- name: copy consul agent configuration
+  template: src=client.j2 dest=/etc/consul.d/client.json group=consul owner=consul
+  sudo: yes
+- name: copy upstart script
+  copy: src=consul.conf dest=/etc/init/consul.conf owner=consul group=consul
+  sudo: yes
+- name: start consul
+  service: name=consul state=started
+  sudo: yes
+  sudo_user: consul

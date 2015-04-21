@@ -7,6 +7,12 @@
 - name: unarchive consul.zip
   unarchive: src=/tmp/consul.zip dest=/usr/local/bin copy=no
   sudo: yes
-
-  
-
+- name: create consul group
+  group: name=consul state=present
+  sudo: yes
+- name: create consul user
+  user: name=consul state=present group=consul groups=sudo
+  sudo: yes
+- name: add nopasswd for user consul
+  lineinfile: "dest=/etc/sudoers state=present line='consul   ALL=(ALL:ALL) NOPASSWD: ALL' validate='visudo -cf %s'"
+  sudo: yes

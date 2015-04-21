@@ -1,0 +1,12 @@
+- name: create go group
+  group: name=go state=present
+  sudo: yes
+- name: create go user
+  user: name=go state=present group=go groups=sudo
+  sudo: yes
+- name: add nopasswd for user go
+  lineinfile: "dest=/etc/sudoers state=present line='go   ALL=(ALL:ALL) NOPASSWD: ALL' validate='visudo -cf %s'"
+  sudo: yes
+- name: install git
+  apt: name=git=1:1.9.1-1ubuntu0.1 state=present
+  sudo: yes

@@ -1,0 +1,6 @@
+- name: install dnsmasq
+  apt: name=dnsmasq=2.68-1 state=present
+  sudo: yes
+- name: configure dnsmasq
+  lineinfile: "dest=/etc/dnsmasq.conf state=present line='address=/.{{ dmz_domain }}.dmz/{{ haproxy_ip }}'"
+  sudo: yes

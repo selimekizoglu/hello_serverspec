@@ -1,3 +1,6 @@
+- name: update apt
+  apt: update_cache=yes
+  sudo: yes
 - name: create go group
   group: name=go state=present
   sudo: yes

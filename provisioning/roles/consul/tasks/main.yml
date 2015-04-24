@@ -23,7 +23,7 @@
   file: path=/etc/consul.d state=directory owner=consul group=consul
   sudo: yes
 - name: copy consul agent configuration
-  template: src=client.j2 dest=/etc/consul.d/client.json group=consul owner=consul
+  template: src=consul.j2 dest=/etc/consul.d/consul.json group=consul owner=consul
   sudo: yes
 - name: copy upstart script
   copy: src=consul.conf dest=/etc/init/consul.conf owner=consul group=consul
@@ -31,4 +31,3 @@
 - name: start consul
   service: name=consul state=started
   sudo: yes
-  sudo_user: consul

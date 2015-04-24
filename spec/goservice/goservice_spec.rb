@@ -16,6 +16,6 @@ describe "goservice" do
   end
   
   describe file("/etc/dnsmasq.conf") do
-    it { should contain "address=/.istanbulcoders.dmz/127.0.0.1" }
+    it { should contain "address=/.istanbulcoders.dmz/192.168.50.2" }
   end
 end

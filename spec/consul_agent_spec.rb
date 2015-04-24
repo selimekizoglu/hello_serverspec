@@ -31,7 +31,7 @@ shared_examples "consul-agent" do
     it { should be_directory }
   end
 
-  describe file("/etc/consul.d/client.json") do
+  describe file("/etc/consul.d/consul.json") do
     it { should be_file }
   end
 

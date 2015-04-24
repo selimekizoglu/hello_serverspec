@@ -6,15 +6,26 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure(2) do |config|
+  CONSUL_CLUSTER_IP = "192.168.50.1"
+  HAPROXY_IP = "192.168.50.2"
+  config.vm.define "haproxy" do |haproxy|
+    haproxy.vm.box = "ubuntu/trusty64"
+    haproxy.vm.network "private_network", ip: HAPROXY_IP
+    haproxy.vm.provision "ansible" do |ansible|
+      ansible.playbook = "provisioning/haproxy.yml"
+      ansible.extra_vars = {
+        consul_servers: [CONSUL_CLUSTER_IP]
+      }
+    end
+  end
   config.vm.define "goservice" do |goservice|
     goservice.vm.box = "ubuntu/trusty64"
     goservice.vm.provision "ansible" do |ansible|
       ansible.playbook = "provisioning/goservice.yml"
-      #ansible.ask_sudo_pass = true
       ansible.extra_vars = {
         dmz_domain: 'istanbulcoders',
-        haproxy_ip: '127.0.0.1',
-        consul_servers: ['127.0.0.2']
+        haproxy_ip: HAPROXY_IP,
+        consul_servers: [CONSUL_CLUSTER_IP]
       }
     end
   end

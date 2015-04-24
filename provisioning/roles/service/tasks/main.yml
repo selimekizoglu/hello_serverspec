@@ -4,3 +4,5 @@
 - name: configure dnsmasq
   lineinfile: "dest=/etc/dnsmasq.conf state=present line='address=/.{{ dmz_domain }}.dmz/{{ haproxy_ip }}'"
   sudo: yes
+  notify:
+  - restart dnsmasq

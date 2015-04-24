@@ -1,0 +1,13 @@
+- name: add haproxy ppa
+  apt_repository: repo='ppa:vbernat/haproxy-1.5' validate_certs=no
+  sudo: yes
+- name: update apt
+  apt: update_cache=yes
+  sudo: yes
+- name: install haproxy
+  apt: name=haproxy=1.5.11-1ppa1~trusty state=present update_cache=yes
+  sudo: yes
+- name: start haproxy
+  service: name=haproxy state=running
+  sudo: yes
+

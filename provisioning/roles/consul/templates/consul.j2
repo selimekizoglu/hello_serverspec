@@ -1,7 +1,10 @@
 {
-  "server": false,
+  "server": {{ server | lower }},
   "data_dir": "/var/consul",
   "log_level": "INFO",
+  {% if server %}
+  "bootstrap_expect": {{ consul_cluster_size }},
+  {% endif %}
   "start_join": [
   {% for server in consul_servers %}
     "{{ server }}"{% if not loop.last %},{% endif %}

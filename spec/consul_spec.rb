@@ -1,7 +1,7 @@
 require "spec_helper"
 require "./spec/common_spec"
 
-shared_examples "consul-agent" do
+shared_examples "consul" do
   describe package("unzip") do
     it { should be_installed.with_version("6.0-9ubuntu1.3") }
   end
